@@ -1,16 +1,19 @@
 <template>
-  <ul class="list">
-    <li class="item" v-for="(item,index) in list" :key="index">
-      <img :src="item.icon" alt="" :class="['icon',item.isDisable?'isActive':'']">
-      <div class="right">
-        <div class="content">
-          <p class="name">{{item.name}}</p>
-          <p class="intro">{{item.intro}}</p>
+  <div class="wrapper" ref="wrapper">
+    <ul class="content">
+      <li class="item" v-for="(item,index) in list" :key="index">
+        <img :src="item.icon" alt="" :class="['icon',item.isDisable?'isActive':'']">
+        <div class="right">
+          <div class="content">
+            <p class="name">{{item.name}}</p>
+            <p class="intro">{{item.intro}}</p>
+          </div>
+          <button @click="download(index)" :disabled="item.isDisable" class="download">{{item.status}}</button>
         </div>
-        <button @click="download(index)" :disabled="item.isDisable" class="download">{{item.status}}</button>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </ul>
+  </div>
+
 </template>
 
 <script lang="ts">
@@ -18,8 +21,10 @@
     Component,
     Vue
   } from "vue-property-decorator";
+  import BScroll from 'better-scroll';
   @Component
   export default class List extends Vue {
+    public scroll: any;
     public list: any[] = [{
         icon: require('@/assets/MonumentValley.png'),
         name: '纪念碑谷',
@@ -68,12 +73,25 @@
         };
       })
     }
+    // 生命周期函数mounted
+    public mounted() {
+      this.$nextTick(() => {
+        this.scroll = new BScroll(this.$refs.wrapper, {
+            startX: 0,
+            click: true,
+            scrollX: true,
+            // 忽略竖直方向的滚动
+            scrollY: false,
+            eventPassthrough: "vertical"
+          })
+      })
+    }
   }
 
 </script>
 
 <style lang="less" scoped>
-  .list {
+  .content {
     padding: 15px 30px;
 
     .item {

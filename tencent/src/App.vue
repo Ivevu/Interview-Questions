@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" ref="app">
     <NavBar></NavBar>
     <List></List>
   </div>
@@ -15,12 +15,15 @@
   @Component({
     components: {
       NavBar,
-      List
+      List,
     }
   })
-  export default class Index extends Vue {}
+  export default class Index extends Vue {
+
+  }
 
 </script>
 <style lang="less" scoped>
   @import "../src/stylesheet/reset.css";
+
 </style>

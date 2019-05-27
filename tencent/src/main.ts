@@ -2,7 +2,6 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
-
 //  import vConsole from "@/util/vconsole";
 Vue.config.productionTip = false;
 // Vue.use(VueLazyload, {
@@ -12,11 +11,10 @@ Vue.config.productionTip = false;
 //   attempt: 1
 // });
 // import VueLazyload from 'vue-lazyload';
- //Vue.use(vConsole);
+//Vue.use(vConsole);
 
 new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount("#app");
-
