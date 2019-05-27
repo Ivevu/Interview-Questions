@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <NavBar></NavBar>
+    <List></List>
   </div>
 </template>
 <script lang="ts">
@@ -10,9 +11,11 @@
     Prop
   } from "vue-property-decorator";
   import NavBar from '@/layout/Nav.vue'
+  import List from '@/components/List.vue'
   @Component({
     components: {
-      NavBar
+      NavBar,
+      List
     }
   })
   export default class Index extends Vue {}
