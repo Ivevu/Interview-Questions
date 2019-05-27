@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;"
+      name="viewport"
+    />
+    <meta http-equiv="cross-request-allowed-origin" content="*">
+    <title>腾讯面试题</title>
+    <script type="text/javascript">
+      // px-rem 自适应换算
+      (function() {
+        function Rem() {
+          var docEl = document.documentElement,
+            oSize = docEl.clientWidth / 7.5;
+          docEl.style.fontSize = oSize + "px";
+        }
+        window.addEventListener("resize", Rem, false);
+        Rem();
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>
+      <strong
+        >We're sorry but activity doesn't work properly without JavaScript
+        enabled. Please enable it to continue.</strong
+      >
+    </noscript>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
