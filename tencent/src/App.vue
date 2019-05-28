@@ -82,6 +82,8 @@
     public endPosY: number = 0;
     public count: number = 0; // 移动次数
 
+
+    // 点击导航栏
     public clickTab(i: number) {
       this.move = { // css切换动效
         transform: `translate(${-i*7.5}rem,0px)`,
@@ -98,6 +100,7 @@
       this.getGameList((i + 1) * 6);
       window.scrollTo(0, 0);
     }
+
     public created() {
       this.getGameList(10);
     }
@@ -108,10 +111,13 @@
       ele.style.width = width;
     }
 
+
     public onMovestart(e: any): void {
       this.startPosX = e.changedTouches[0].pageX;
       this.startPosY = e.changedTouches[0].pageY;
     }
+
+
     public onMoveEnd(e: any) {
       this.endPosX = e.changedTouches[0].pageX;
       this.endPosY = e.changedTouches[0].pageY;
@@ -129,6 +135,7 @@
         window.scrollTo(0, 0);
       }
     }
+    
     // 获取分类列表
     public getGameList(num: number) {
       Query(num).then(res => {
