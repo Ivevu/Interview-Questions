@@ -12,61 +12,21 @@
 <script lang="ts">
   import {
     Component,
-    Vue
+    Vue,
+    Emit,
+    Prop
   } from "vue-property-decorator";
   @Component
   export default class Nav extends Vue {
-    public navList: any[] = [ // 导航栏
-      {
-        src: require('@/assets/role.png'),
-        value: '角色',
-        isActive: true,
-      },
-      {
-        src: require('@/assets/leisure.png'),
-        isActive: false,
-        value: '休闲'
-      },
-      {
-        src: require('@/assets/console.png'),
-        isActive: false,
-        value: '单机'
-      },
-      {
-        src: require('@/assets/chess.png'),
-        isActive: false,
-        value: '棋牌'
-      },
-      {
-        src: require('@/assets/action.png'),
-        isActive: false,
-        value: '动作'
-      },
-      {
-        src: require('@/assets/shoot.png'),
-        isActive: false,
-        value: '射击'
-      },
-    ];
-    public move: Object = { // css切换动效
-      transform: 'translate(0px,0px)',
-      transition: 'transform 0.35s',
-    }
-    public static: Object = { // css切换动效
-      'border-bottom': '1Px solid rgb(238, 238, 238)'
-    }
+    @Prop() navList: any[];
+    @Prop() move: Object;
+
     /**
      * 点击导航栏
      */
-    public clickTab(i: number): void {
-      this.move = {
-        transform: `translate(${100*i}%,0px)`,
-        transition: 'transform 0.35s',
-      }
-      this.navList.forEach(item => {
-        item.isActive = false;
-      });
-      this.navList[i].isActive = true;
+    @Emit('clickTab')
+    public clickTab(i: number): number {
+      return i;
     }
   }
 
@@ -77,6 +37,10 @@
     display: flex;
     padding: 0 30px;
     height: 140px;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    background: #ffffff;
     justify-content: space-around;
     border-bottom: 1Px solid rgb(238, 238, 238);
 
