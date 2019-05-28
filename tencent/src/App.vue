@@ -2,7 +2,7 @@
   <div id="app" @touchstart="onMovestart($event)" @touchend="onMoveEnd($event)" ref="app">
     <NavBar :move="navMove" :navList="navList" @clickTab="clickTab"></NavBar>
     <div :class="['swiperBox']" :style="move" ref="swiperBox">
-      <div class="swiper" v-for="(item,index) in [1,2] ">
+      <div class="swiper" v-for="(item,index) in  navList" :key="index">
         <List :list="list"></List>
       </div>
     </div>
@@ -14,6 +14,9 @@
     Vue,
     Prop
   } from "vue-property-decorator";
+  import {
+    Query
+  } from "@/services/api";
   import BScroll from 'better-scroll';
   import NavBar from '@/layout/Nav.vue'
   import List from '@/components/List.vue'
@@ -63,54 +66,21 @@
         path: '/shoot'
       },
     ];
-    public list: any[] = [{
-        icon: require('@/assets/MonumentValley.png'),
-        name: '纪念碑谷',
-        intro: '艺术品级的揭秘游戏',
-        isDisable: false,
-        status: '下载',
-      },
-      {
-        icon: require('@/assets/paopale.png'),
-        name: '头脑特工对队：泡泡乐',
-        isDisable: false,
-        status: '下载',
-        intro: '迪士尼满分泡泡龙'
-      },
-      {
-        icon: require('@/assets/castle.png'),
-        name: '城堡突袭2',
-        isDisable: false,
-        status: '下载',
-        intro: '年度塔防 不得不玩'
-      },
-      {
-        icon: require('@/assets/endless.png'),
-        name: '无尽吞噬',
-        isDisable: false,
-        status: '下载',
-        intro: '优雅的吃掉你'
-      },
-      {
-        icon: require('@/assets/twoDots.png'),
-        name: 'TwoDots：冒险之旅',
-        isDisable: false,
-        status: '下载',
-        intro: '玩的完全停不下来'
-      },
-    ];
-    public move: Object = { // css切换动效
+    public list: any[] = [];
+    public move: Object = { // 页面css切换动效
       transform: 'translate(0px,0px)',
       transition: 'transform 0.35s',
     };
-    public navMove: Object = { // css切换动效
+    public navMove: Object = { // 导航栏css切换动效
       transform: 'translate(0px,0px)',
       transition: 'transform 0.35s',
     };
 
-    public startPosX: number = 0;
+    public startPosX: number = 0; // 触摸起点 X坐标
+    public startPosY: number = 0;
     public endPosX: number = 0;
-    public count: number = 0;
+    public endPosY: number = 0;
+    public count: number = 0; // 移动次数
 
     public clickTab(i: number) {
       this.move = { // css切换动效
@@ -125,6 +95,11 @@
         item.isActive = false;
       });
       this.navList[i].isActive = true;
+      this.getGameList((i + 1) * 6);
+      window.scrollTo(0, 0);
+    }
+    public created() {
+      this.getGameList(10);
     }
 
     public mounted() {
@@ -135,17 +110,33 @@
 
     public onMovestart(e: any): void {
       this.startPosX = e.changedTouches[0].pageX;
+      this.startPosY = e.changedTouches[0].pageY;
     }
-    public onMoveEnd(e: any): void {
+    public onMoveEnd(e: any) {
       this.endPosX = e.changedTouches[0].pageX;
-      if (this.endPosX - this.startPosX > 0) {
+      this.endPosY = e.changedTouches[0].pageY;
+      // 左移动和右移动的判断条件
+      if (this.endPosX > this.startPosX && Math.abs(this.endPosY - this.startPosY) < 50 && Math.abs(this.endPosX -
+          this.startPosX) > 50 && this.count > 0) {
         this.clickTab(--this.count);
-      } else {
+        this.getGameList(6);
+        window.scrollTo(0, 0);
+      } else if (this.endPosX < this.startPosX && Math.abs(this.endPosY - this.startPosY) < 50 && Math.abs(this
+          .endPosX - this.startPosX) > 50 && this.navList
+        .length > this.count + 1) {
         this.clickTab(++this.count);
+        this.getGameList(12);
+        window.scrollTo(0, 0);
       }
-
     }
-
+    // 获取分类列表
+    public getGameList(num: number) {
+      Query(num).then(res => {
+        this.list = res.gameList
+      }).catch(error => {
+        // 其他错误
+      })
+    }
   }
 
 </script>

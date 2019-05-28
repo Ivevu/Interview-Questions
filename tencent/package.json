@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "mockjs": "^1.0.1-beta3",
     "postcss-pxtorem": "^4.0.1",
     "vue": "^2.6.6",
     "vue-class-component": "^6.0.0",

@@ -1,7 +1,7 @@
 export default {
   method: 'get',
   // 基础url前缀
-  baseURL: '//fx.b2i.shop',
+  baseURL: '//mockjs.com/api',
   // 请求头信息
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',

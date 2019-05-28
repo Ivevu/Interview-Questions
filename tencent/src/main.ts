@@ -4,6 +4,7 @@ import router from "./router";
 import store from "./store";
 //  import vConsole from "@/util/vconsole";
 Vue.config.productionTip = false;
+require('./mock/mock');
 // Vue.use(VueLazyload, {
 //   preLoad: 1.3,
 //   error: 'src/assets/order.done',

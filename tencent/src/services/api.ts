@@ -1,6 +1,6 @@
-import { Http } from './http';
-import Interface from './interface';
-import * as Params from './params';
+import { Http } from "./http";
+import Interface from "./interface";
+import * as Params from "./params";
 
 const http = new Http();
 
@@ -12,6 +12,6 @@ export const BASEURL = http.set();
  */
 
 // 获取登录框url接口
-export const Query = (params: Params.Query): Promise<any> => {
-  return http.Get(Interface.query, params);
+export const Query = (params: any): Promise<any> => {
+  return http.Post(Interface.query, { num: params });
 };
