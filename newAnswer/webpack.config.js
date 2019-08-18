@@ -1,8 +1,10 @@
 const merge = require('webpack-merge');
+const path = require('path')
 
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const commonConfig = require('./webpack.common.config');
 
@@ -62,6 +64,7 @@ publicConfig = {
       chunkFilename: '[id].css',
       ignoreOrder: false, // Enable to remove warnings about conflicting order
     }),
+    process.env.NODE_ENV = 'production' ? new BundleAnalyzerPlugin() : null
   ]
 }
 

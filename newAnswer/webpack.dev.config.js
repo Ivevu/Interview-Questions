@@ -2,7 +2,6 @@ const merge = require('webpack-merge');
 const path = require('path')
 const webpack = require('webpack')
 const commonConfig = require('./webpack.common.config.js');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const devConfig = {
   // 入口
@@ -55,7 +54,6 @@ const devConfig = {
   plugins: [
     // 热加载
     new webpack.HotModuleReplacementPlugin(),
-    new BundleAnalyzerPlugin()
   ]
 }
 
