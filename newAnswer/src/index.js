@@ -4,6 +4,7 @@ import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux'
 import getRouter from 'router/router';
 import store from './redux/store';
+import "lib-flexible"
 
 /*初始化*/
 renderWithHotReload(getRouter());
