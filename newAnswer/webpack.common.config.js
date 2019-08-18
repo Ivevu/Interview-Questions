@@ -5,13 +5,13 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 commonConfig = {
   // 入口
   entry: {
-    app: ["@babel/polyfill",path.join(__dirname, 'src/index.js')]
+    app: ["@babel/polyfill", path.join(__dirname, 'src/index.js')]
   },
   /* 输出 */
   output: {
     path: path.join(__dirname, './dist'),
     filename: '[name].[chunkhash].js',
-    chunkFilename: '[name].[chunkhash].js'
+    chunkFilename: './static/js/[name].[chunkhash].js'
   },
   /* 目录别名 */
   resolve: {
@@ -31,18 +31,7 @@ commonConfig = {
         use: ['babel-loader?cacheDirectory=true'],
         include: path.join(__dirname, 'src')
       },
-      {
-        test: /\.(png|jpg|gif)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 2,
-              name: '[contenthash].[ext]',
-            },
-          },
-        ],
-      }
+      
     ]
   },
   plugins: [

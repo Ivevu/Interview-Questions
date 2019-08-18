@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styles from './Page1.less'
-import img from './mine_selected.png'
+import img from './WechatIMG1059.png'
 export default class Page1 extends Component {
     render() {
         return (

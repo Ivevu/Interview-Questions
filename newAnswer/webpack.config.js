@@ -25,7 +25,13 @@ publicConfig = {
           test: /[\\/]node_modules[\\/](react|react-dom|react-router-dom|redux|react-redux)[\\/]/,
           name: 'vendor',
           chunks: 'all',
-        }
+        },
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true,
+        },
       }
     }
   },
@@ -35,24 +41,49 @@ publicConfig = {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              minimize: true
+            }
+          },
+          'css-loader'
+        ]
+      },
+      {
         test: /\.less$/,
         use: [
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
-            options: {
-              modules: {
-                mode: 'local',
-                localIdentName: '[path][name]__[local]--[hash:base64:5]',
-                context: path.resolve(__dirname, 'src'),
-                hashPrefix: 'my-custom-hash',
-              },
-            },
           },
           'less-loader',
           'postcss-loader'
         ],
-      }
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 1024,
+              name: '/static/images/[contenthash].[ext]',
+            },
+          },
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              pngquant: {
+                quality: '80-90',
+                speed: 1,
+              },
+            },
+          },
+        ],
+      },
     ]
   },
   plugins: [
@@ -60,11 +91,11 @@ publicConfig = {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // all options are optional
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: '/static/css/[name].css',
+      chunkFilename: '/static/css/[id].css',
       ignoreOrder: false, // Enable to remove warnings about conflicting order
     }),
-    process.env.NODE_ENV = 'production' ? new BundleAnalyzerPlugin() : null
+    // process.env.NODE_ENV = 'production' ? new BundleAnalyzerPlugin() : null
   ]
 }
 

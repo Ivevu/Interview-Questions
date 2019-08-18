@@ -48,6 +48,18 @@ const devConfig = {
             loader: "postcss-loader"
           }
         ],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 2,
+              name: '[contenthash].[ext]',
+            },
+          },
+        ],
       }
     ]
   },
