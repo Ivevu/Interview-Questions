@@ -5,6 +5,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const px2rem = require('postcss-px2rem');
 
 const commonConfig = require('./webpack.common.config');
 
@@ -82,6 +83,13 @@ publicConfig = {
               },
             },
           },
+          'less-loader',
+          {
+            loader: "postcss-loader",
+            options: {
+              plugins: [px2rem({ remUnit: 75 })]
+            }
+          }
         ],
       },
     ]

@@ -37,6 +37,8 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
+    "lib-flexible": "^0.3.2",
+    "postcss-px2rem": "^0.3.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-hot-loader": "^4.12.11",

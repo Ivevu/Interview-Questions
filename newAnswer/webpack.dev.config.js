@@ -2,7 +2,8 @@ const merge = require('webpack-merge');
 const path = require('path')
 const webpack = require('webpack')
 const commonConfig = require('./webpack.common.config.js');
-
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const px2rem = require('postcss-px2rem');
 const devConfig = {
   // 入口
   entry: {
@@ -45,7 +46,11 @@ const devConfig = {
             loader: 'less-loader', // compiles Less to CSS
           },
           {
-            loader: "postcss-loader"
+            loader: "postcss-loader",
+            options: {
+              ident: 'postcss',
+              plugins: [px2rem({ remUnit: 75 })]
+            }
           }
         ],
       },
@@ -66,6 +71,7 @@ const devConfig = {
   plugins: [
     // 热加载
     new webpack.HotModuleReplacementPlugin(),
+    // new BundleAnalyzerPlugin()
   ]
 }
 
