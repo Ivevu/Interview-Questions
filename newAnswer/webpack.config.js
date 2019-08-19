@@ -49,13 +49,13 @@ publicConfig = {
               },
             },
           },
-          'less-loader',
           {
             loader: "postcss-loader",
             options: {
               plugins: [px2rem({ remUnit: 75 })]
             }
-          }
+          },
+          'less-loader',
         ],
       }
     ]

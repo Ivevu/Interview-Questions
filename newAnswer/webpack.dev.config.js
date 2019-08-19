@@ -43,15 +43,15 @@ const devConfig = {
             },
           },
           {
-            loader: 'less-loader', // compiles Less to CSS
-          },
-          {
             loader: "postcss-loader",
             options: {
               ident: 'postcss',
               plugins: [px2rem({ remUnit: 75 })]
             }
-          }
+          },
+          {
+            loader: 'less-loader', // compiles Less to CSS
+          },
         ],
       }
     ]
